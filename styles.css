@@ -1,0 +1,48 @@
+.root {
+	-fx-background-color: #a6bad8 ;
+	-fx-background-image: url('img/SEA.gif');
+	-fx-background-size: cover;
+	-fx-background-position: top ;
+}
+.vbox1 {
+	-fx-background-image: url('img/RED.gif');
+	-fx-background-color: black;
+}
+
+.vbox2 {
+	-fx-background-image: url('img/RED.gif');
+	-fx-background-color: white;
+}
+
+.titleLabel {
+	-fx-font-size: 25px;
+	-fx-font-family: "Courier New";
+
+}
+.loadGameButton {
+    -fx-font: bold italic 20pt "Arial";
+    -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );
+    /*-fx-border-insets: 5;*/
+    -fx-border-radius: 15;
+}
+.registerButton {
+    -fx-font: bold italic 20pt "Arial";
+    -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );
+}
+.registerButton: hover {
+	-fx-background-color: orange;
+}
+.loadGameButton: hover {
+	-fx-background-color: #a6bad8;
+}
+.gridMap {
+    -fx-background-color: red;
+}
+.loadSc {
+	-fx-background-image: url('img/redSea.gif');
+	-fx-background-size: cover;
+	-fx-background-position: top ;
+}
+.mareaBut: hover {
+	-fx-background-color:#8e300e;
+}
