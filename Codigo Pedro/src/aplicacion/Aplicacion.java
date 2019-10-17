@@ -29,31 +29,29 @@ public class Aplicacion extends Application{
          * Campos de texto *
          * ****************/
 
-        GridPane paneContenidomulario = new GridPane();
+        GridPane paneFormulario = new GridPane();
 
         Label lblNombre = new Label("Nombre:");
         txtNombre = new TextField();
-        paneContenidomulario.add(lblNombre, 0, 0);
-        paneContenidomulario.add(txtNombre, 1, 0);
+        paneFormulario.add(lblNombre, 0, 0);
+        paneFormulario.add(txtNombre, 1, 0);
 
         Label lblMatricula = new Label("Matrícula:");
         txtMatricula = new TextField();
-        paneContenidomulario.add(lblMatricula, 0, 1);
-        paneContenidomulario.add(txtMatricula, 1, 1);
+        paneFormulario.add(lblMatricula, 0, 1);
+        paneFormulario.add(txtMatricula, 1, 1);
 
         Label lblCalificacion = new Label("Calificación:");
         txtCalificacion = new TextField();
-        paneContenidomulario.add(lblCalificacion, 0, 2);
-        paneContenidomulario.add(txtCalificacion, 1, 2);
-
-        paneContenido.getChildren().add(paneContenidomulario);
+        paneFormulario.add(lblCalificacion, 0, 2);
+        paneFormulario.add(txtCalificacion, 1, 2);
 
         /*******************
          *     Botones     *
          * ****************/
 
         Button bttnAñadir = new Button("Añadir");
-        paneContenido.getChildren().add(bttnAñadir);
+        paneFormulario.add(bttnAñadir, 0, 3);
         bttnAñadir.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
                 anadirEstudiante();
@@ -61,7 +59,7 @@ public class Aplicacion extends Application{
         });
 
         Button bttnEliminar = new Button("Eliminar");
-        paneContenido.getChildren().add(bttnEliminar);
+        paneFormulario.add(bttnEliminar, 1, 3);
         bttnEliminar.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
                 eliminarEstudiante();
@@ -69,7 +67,11 @@ public class Aplicacion extends Application{
         });
 
         Button bttnOrdenar = new Button("Ordenar");
-        paneContenido.getChildren().add(bttnOrdenar);
+        paneFormulario.add(bttnOrdenar, 0, 4);
+
+        paneFormulario.setHgap(10);
+        paneFormulario.setVgap(25);
+        paneContenido.getChildren().add(paneFormulario);
 
         /*******************
          *      Lista      *
