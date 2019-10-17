@@ -1,5 +1,7 @@
 package aplicacion;
 
+import java.util.LinkedList;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +21,7 @@ public class Aplicacion extends Application{
     private TextField txtNombre, txtMatricula, txtCalificacion;
     private ObservableList<Estudiante> lista;
     private ListView<Estudiante> lvEstudiante;
+    private LinkedList<Estudiante> listaLigada = new LinkedList<>();
 
     public void start(Stage stage) throws Exception {
         BorderPane panePrincipal = new BorderPane();
@@ -68,6 +71,11 @@ public class Aplicacion extends Application{
 
         Button bttnOrdenar = new Button("Ordenar");
         paneFormulario.add(bttnOrdenar, 0, 4);
+        bttnOrdenar.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent e) {
+                ordenarEstudiantes();
+            }
+        });
 
         paneFormulario.setHgap(10);
         paneFormulario.setVgap(25);
@@ -83,8 +91,8 @@ public class Aplicacion extends Application{
 
         Scene scene = new Scene(panePrincipal);
         stage.setScene(scene);
-        stage.setHeight(600);
-        stage.setWidth(600);
+        stage.setHeight(450);
+        stage.setWidth(500);
         stage.show();
     }
 
@@ -99,20 +107,73 @@ public class Aplicacion extends Application{
 
         Estudiante e = new Estudiante(nombre, matricula, calificacion);
 
-        lista.add(e);
+        listaLigada.add(e);
+
+        lista.setAll(listaLigada);
         txtNombre.setText("");
         txtMatricula.setText("");
         txtCalificacion.setText("");
 
-        System.out.println(lista);
+        /*System.out.println("Observable List: "+lista);
+        System.out.println("Linked List:     "+listaLigada.toString());*/
     }
 
     private void eliminarEstudiante() {
         Estudiante e = lvEstudiante.getSelectionModel().getSelectedItem();
 
-        lista.remove(e);
+        listaLigada.remove(e);
 
-        System.out.println(lista);
+        lista.setAll(listaLigada);
+
+        /*System.out.println("Observable List: "+lista);
+        System.out.println("Linked List:     "+listaLigada.toString());*/
+    }
+
+    private void ordenarEstudiantes() {
+        quickSort(0, listaLigada.size()-1);
+
+        lista.setAll(listaLigada);
+
+        /*System.out.println("Observable List: "+lista);
+        System.out.println("Linked List:     "+listaLigada.toString());*/
+    }
+
+    /*******************
+     *    Quick sort   *
+     * ****************/
+
+    private void intercambiar(int indice1, int indice2) {
+        Estudiante temp1 = listaLigada.get(indice1);
+        Estudiante temp2 = listaLigada.get(indice2);
+        listaLigada.set(indice1, temp2);
+        listaLigada.set(indice2, temp1);
+    }
+
+    private void quickSort(int izquierda, int derecha) {
+        Estudiante pivote = listaLigada.get((derecha + izquierda) / 2);
+        int i = izquierda;
+        int j = derecha;
+        while (i <= j) {
+            while (listaLigada.get(i).getCalificacion() < pivote.getCalificacion()) {
+                i++;
+            }
+            while (listaLigada.get(j).getCalificacion() > pivote.getCalificacion()) {
+                j--;
+            }
+            if (i <= j) {
+                if (i != j) {
+                    intercambiar(i, j);
+                }
+                i++;
+                j--;
+            }
+        }
+        if (izquierda < j) {
+            quickSort(izquierda, j);
+        }
+        if (i < derecha) {
+            quickSort(i, derecha);
+        }
     }
 
 
