@@ -1,148 +1,100 @@
 package aplicacion;
 
 import java.util.LinkedList;
-
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Aplicacion extends Application{
-    private TextField txtNombre, txtMatricula, txtCalificacion;
-    private ObservableList<Estudiante> lista;
-    private ListView<Estudiante> lvEstudiante;
-    private LinkedList<Estudiante> listaLigada = new LinkedList<>();
+public class Aplicacion extends Application {
 
-    public void start(Stage stage) throws Exception {
-        BorderPane panePrincipal = new BorderPane();
-        FlowPane paneContenido = new FlowPane();
-        panePrincipal.setCenter(paneContenido);
+  LinkedList<Estudiante> listaLigada = new LinkedList<>();
 
-        /*******************
-         * Campos de texto *
-         * ****************/
+  public static void main(String[] args) {
+    launch();
+  }
 
-        GridPane paneFormulario = new GridPane();
+  public void start(Stage stage){
+    stage.setTitle("SISAA");
 
-        Label lblNombre = new Label("Nombre:");
-        txtNombre = new TextField();
-        paneFormulario.add(lblNombre, 0, 0);
-        paneFormulario.add(txtNombre, 1, 0);
+    BorderPane panePrincipal = new BorderPane();
+    FlowPane paneContenido = new FlowPane();
+    panePrincipal.setCenter(paneContenido);
+    GridPane paneFormulario = new GridPane();
 
-        Label lblMatricula = new Label("Matrícula:");
-        txtMatricula = new TextField();
-        paneFormulario.add(lblMatricula, 0, 1);
-        paneFormulario.add(txtMatricula, 1, 1);
+    Label lblNombre = new Label("Nombre:");
+    TextField txtNombre = new TextField();
+    paneFormulario.add(lblNombre, 0, 0);
+    paneFormulario.add(txtNombre, 1, 0);
 
-        Label lblCalificacion = new Label("Calificación:");
-        txtCalificacion = new TextField();
-        paneFormulario.add(lblCalificacion, 0, 2);
-        paneFormulario.add(txtCalificacion, 1, 2);
+    Label lblMatricula = new Label("Matricula:");
+    TextField txtMatricula = new TextField();
+    paneFormulario.add(lblMatricula, 0, 1);
+    paneFormulario.add(txtMatricula, 1, 1);
 
-        /*******************
-         *     Botones     *
-         * ****************/
+    Label lblCalificacion = new Label("Calificacion:");
+    TextField txtCalificacion = new TextField();
+    paneFormulario.add(lblCalificacion, 0, 2);
+    paneFormulario.add(txtCalificacion, 1, 2);
 
-        Button bttnAñadir = new Button("Añadir");
-        paneFormulario.add(bttnAñadir, 0, 3);
-        bttnAñadir.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent e) {
-                anadirEstudiante();
-            }
-        });
+    Button btnAdd = new Button("Add");
+    paneFormulario.add(btnAdd, 0, 3);
+    btnAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+      public void handle(MouseEvent e) {
+        //addEstudiante();
+      }
+    });
 
-        Button bttnEliminar = new Button("Eliminar");
-        paneFormulario.add(bttnEliminar, 1, 3);
-        bttnEliminar.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent e) {
-                eliminarEstudiante();
-            }
-        });
+    Button btnEliminar = new Button("Delete");
+    paneFormulario.add(btnEliminar, 1, 3);
+    btnEliminar.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+      public void handle(MouseEvent e) {
+        //eliminarEstudiante();
+      }
+    });
 
-        Button bttnOrdenar = new Button("Ordenar");
-        paneFormulario.add(bttnOrdenar, 0, 4);
-        bttnOrdenar.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent e) {
-                ordenarEstudiantes();
-            }
-        });
+    Button btnSort = new Button("Sort");
+    paneFormulario.add(btnSort, 0, 4);
+    btnSort.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+      public void handle(MouseEvent e) {
+        //ordenarEstudiantes();
+      }
+    });
 
-        paneFormulario.setHgap(10);
-        paneFormulario.setVgap(25);
-        paneContenido.getChildren().add(paneFormulario);
+    paneFormulario.setHgap(10);
+    paneFormulario.setVgap(25);
+    paneContenido.getChildren().add(paneFormulario);
 
-        /*******************
-         *      Lista      *
-         * ****************/
+    Label listaEstudiantes = new Label("1. Vacio");
+    paneContenido.getChildren().add(listaEstudiantes);
 
-        lista = FXCollections.observableArrayList();
-        lvEstudiante = new ListView<>(lista);
-        paneContenido.getChildren().add(lvEstudiante);
+    Scene scene = new Scene(panePrincipal);
+    stage.setScene(scene);
+    stage.setHeight(450);
+    stage.setWidth(500);
+    stage.show();
+  }
 
-        Scene scene = new Scene(panePrincipal);
-        stage.setScene(scene);
-        stage.setHeight(450);
-        stage.setWidth(500);
-        stage.show();
-    }
+  private void addEstudiante(String nombre, String matricula, double calificacion){
 
-    /*******************
-     *    Funciones    *
-     * ****************/
+  }
 
-    private void anadirEstudiante() {
-        String nombre = txtNombre.getText();
-        String matricula = txtMatricula.getText();
-        double calificacion = Double.parseDouble(txtCalificacion.getText());
+  private void eliminarEstudiante(){
 
-        Estudiante e = new Estudiante(nombre, matricula, calificacion);
+  }
 
-        listaLigada.add(e);
+  private void ordenarEstudiantes(){
 
-        lista.setAll(listaLigada);
-        txtNombre.setText("");
-        txtMatricula.setText("");
-        txtCalificacion.setText("");
+  }
 
-        /*System.out.println("Observable List: "+lista);
-        System.out.println("Linked List:     "+listaLigada.toString());*/
-    }
-
-    private void eliminarEstudiante() {
-        Estudiante e = lvEstudiante.getSelectionModel().getSelectedItem();
-
-        listaLigada.remove(e);
-
-        lista.setAll(listaLigada);
-
-        /*System.out.println("Observable List: "+lista);
-        System.out.println("Linked List:     "+listaLigada.toString());*/
-    }
-
-    private void ordenarEstudiantes() {
-        quickSort(0, listaLigada.size()-1);
-
-        lista.setAll(listaLigada);
-
-        /*System.out.println("Observable List: "+lista);
-        System.out.println("Linked List:     "+listaLigada.toString());*/
-    }
-
-    /*******************
-     *    Quick sort   *
-     * ****************/
-
-    private void intercambiar(int indice1, int indice2) {
+  private void intercambiar(int indice1, int indice2) {
         Estudiante temp1 = listaLigada.get(indice1);
         Estudiante temp2 = listaLigada.get(indice2);
         listaLigada.set(indice1, temp2);
@@ -174,10 +126,5 @@ public class Aplicacion extends Application{
         if (i < derecha) {
             quickSort(i, derecha);
         }
-    }
-
-
-    public static void main(String[] args) {
-        launch();
     }
 }
