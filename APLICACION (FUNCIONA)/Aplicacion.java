@@ -37,12 +37,12 @@ public class Aplicacion extends Application{
         paneFormulario.add(lblNombre, 0, 0);
         paneFormulario.add(txtNombre, 1, 0);
 
-        Label lblMatricula = new Label("Matrícula:");
+        Label lblMatricula = new Label("Matricula:");
         txtMatricula = new TextField();
         paneFormulario.add(lblMatricula, 0, 1);
         paneFormulario.add(txtMatricula, 1, 1);
 
-        Label lblCalificacion = new Label("Calificación:");
+        Label lblCalificacion = new Label("Calificacion:");
         txtCalificacion = new TextField();
         paneFormulario.add(lblCalificacion, 0, 2);
         paneFormulario.add(txtCalificacion, 1, 2);
@@ -51,7 +51,7 @@ public class Aplicacion extends Application{
          *     Botones     *
          * ****************/
 
-        Button bttnAnadir = new Button("Añadir");
+        Button bttnAnadir = new Button("Add");
         paneFormulario.add(bttnAnadir, 0, 3);
         bttnAnadir.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
@@ -59,7 +59,7 @@ public class Aplicacion extends Application{
             }
         });
 
-        Button bttnEliminar = new Button("Eliminar");
+        Button bttnEliminar = new Button("Delete");
         paneFormulario.add(bttnEliminar, 1, 3);
         bttnEliminar.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
@@ -67,7 +67,7 @@ public class Aplicacion extends Application{
             }
         });
 
-        Button bttnOrdenar = new Button("Ordenar");
+        Button bttnOrdenar = new Button("Sort");
         paneFormulario.add(bttnOrdenar, 0, 4);
         bttnOrdenar.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
