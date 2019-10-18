@@ -48,7 +48,11 @@ public class Aplicacion extends Application {
     paneFormulario.add(btnAdd, 0, 3);
     btnAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
       public void handle(MouseEvent e) {
-        //addEstudiante();
+        addEstudiante(txtNombre.getText(), txtMatricula.getText(), Double.parseDouble(txtCalificacion.getText()));
+        txtNombre.clear();
+        txtMatricula.clear();
+        txtCalificacion.clear();
+        actualizarLista();
       }
     });
 
@@ -57,6 +61,7 @@ public class Aplicacion extends Application {
     btnEliminar.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
       public void handle(MouseEvent e) {
         //eliminarEstudiante();
+        actualizarLista();
       }
     });
 
@@ -64,7 +69,8 @@ public class Aplicacion extends Application {
     paneFormulario.add(btnSort, 0, 4);
     btnSort.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
       public void handle(MouseEvent e) {
-        //ordenarEstudiantes();
+        ordenarEstudiantes();
+        actualizarLista();
       }
     });
 
@@ -82,8 +88,13 @@ public class Aplicacion extends Application {
     stage.show();
   }
 
-  private void addEstudiante(String nombre, String matricula, double calificacion){
+  private void actualizarLista(){
+    System.out.println(listaLigada.toString());
+  }
 
+  private void addEstudiante(String nombre, String matricula, double calificacion){
+    Estudiante e = new Estudiante(nombre, matricula, calificacion);
+    listaLigada.add(e);
   }
 
   private void eliminarEstudiante(){
@@ -91,7 +102,7 @@ public class Aplicacion extends Application {
   }
 
   private void ordenarEstudiantes(){
-
+    quickSort(0, listaLigada.size()-1);
   }
 
   private void intercambiar(int indice1, int indice2) {
