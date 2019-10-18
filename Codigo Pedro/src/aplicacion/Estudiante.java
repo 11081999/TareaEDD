@@ -1,5 +1,3 @@
-package aplicacion;
-
 public class Estudiante {
     private String nombre, matricula;
     private double calificacion;
@@ -55,6 +53,6 @@ public class Estudiante {
 
     @Override
     public String toString() {
-        return matricula + " · " + nombre + " ····· " + calificacion;
+        return matricula + " - " + nombre + "  - - - " + calificacion;
     }
 }
