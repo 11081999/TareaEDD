@@ -44,6 +44,9 @@ public class Aplicacion extends Application {
     paneFormulario.add(lblCalificacion, 0, 2);
     paneFormulario.add(txtCalificacion, 1, 2);
 
+    Label listaEstudiantes = new Label("Vacia");
+    TextField eliminar = new TextField();
+
     Button btnAdd = new Button("Add");
     paneFormulario.add(btnAdd, 0, 3);
     btnAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
@@ -52,7 +55,7 @@ public class Aplicacion extends Application {
         txtNombre.clear();
         txtMatricula.clear();
         txtCalificacion.clear();
-        actualizarLista();
+        actualizarLista(listaEstudiantes);
       }
     });
 
@@ -60,25 +63,26 @@ public class Aplicacion extends Application {
     paneFormulario.add(btnEliminar, 1, 3);
     btnEliminar.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
       public void handle(MouseEvent e) {
-        //eliminarEstudiante();
-        actualizarLista();
+        eliminarEstudiante(eliminar);
+        actualizarLista(listaEstudiantes);
       }
     });
+
+
+    paneFormulario.add(eliminar, 2, 3);
 
     Button btnSort = new Button("Sort");
     paneFormulario.add(btnSort, 0, 4);
     btnSort.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
       public void handle(MouseEvent e) {
         ordenarEstudiantes();
-        actualizarLista();
+        actualizarLista(listaEstudiantes);
       }
     });
 
     paneFormulario.setHgap(10);
     paneFormulario.setVgap(25);
     paneContenido.getChildren().add(paneFormulario);
-
-    Label listaEstudiantes = new Label("1. Vacio");
     paneContenido.getChildren().add(listaEstudiantes);
 
     Scene scene = new Scene(panePrincipal);
@@ -88,7 +92,16 @@ public class Aplicacion extends Application {
     stage.show();
   }
 
-  private void actualizarLista(){
+  private void actualizarLista(Label texto){
+    if (listaLigada.size() == 0) {
+      texto.setText("Vacia");
+    } else {
+      String nombres = "";
+      for (int i = 0; listaLigada.size() > i; i++) {
+        nombres += (i+1) + ". " + listaLigada.get(i).toString() + "\n";
+      }
+      texto.setText(nombres);
+    }
     System.out.println(listaLigada.toString());
   }
 
@@ -97,8 +110,12 @@ public class Aplicacion extends Application {
     listaLigada.add(e);
   }
 
-  private void eliminarEstudiante(){
-
+  private void eliminarEstudiante(TextField texto){
+    int index = Integer.parseInt(texto.getText()) - 1;
+    if (index > -1 && index < listaLigada.size()) {
+      listaLigada.remove(index);
+    }
+    texto.clear();
   }
 
   private void ordenarEstudiantes(){
